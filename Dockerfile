@@ -19,7 +19,7 @@ RUN apk --no-cache add python \
     libsodium \
     git && \
     cd ~ && \
-    git clone -b akkariiin/master git@github.com:RexQian/shadowsocksr.git
+    git clone -b akkariiin/master https://github.com/RexQian/shadowsocksr.git
 
 WORKDIR /shadowsocksr/shadowsocks
 
