@@ -1,7 +1,7 @@
 FROM alpine:3.6
 
 ENV SERVER_ADDR     0.0.0.0
-ENV SERVER_PORT     51348
+ENV SERVER_PORT     10100
 ENV PASSWORD        psw
 ENV METHOD          aes-128-ctr
 ENV PROTOCOL        auth_aes128_md5
@@ -17,15 +17,11 @@ ARG WORK=~
 
 RUN apk --no-cache add python \
     libsodium \
-    wget
+    git && \
+    cd ~ && \
+    git clone -b akkariiin/master git@github.com:RexQian/shadowsocksr.git
 
-
-RUN mkdir -p $WORK && \
-    wget -qO- --no-check-certificate https://github.com/shadowsocksr/shadowsocksr/archive/$BRANCH.tar.gz | tar -xzf - -C $WORK
-
-
-WORKDIR $WORK/shadowsocksr-$BRANCH/shadowsocks
-
+WORKDIR /shadowsocksr/shadowsocks
 
 EXPOSE $SERVER_PORT
-CMD python server.py -p $SERVER_PORT -k $PASSWORD -m $METHOD -O $PROTOCOL -o $OBFS -G $PROTOCOLPARAM
+CMD python server.py 
