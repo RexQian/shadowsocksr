@@ -24,4 +24,4 @@ RUN apk --no-cache add python \
 WORKDIR /shadowsocksr/shadowsocks
 
 EXPOSE $SERVER_PORT
-CMD python server.py 
+CMD python /root/shadowsocksr/shadowsocks/server.py
